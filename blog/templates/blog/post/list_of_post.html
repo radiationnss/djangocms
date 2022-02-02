@@ -1,0 +1,29 @@
+{% extends 'blog/base.html' %}
+{% block description %}This is the description{% endblock %}
+{% block title %}List of the blog post{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="page-header">
+            <h1>
+                Our latest Posts!!!
+            </h1>
+        </div>
+        {% for post in posts %}
+            <a href="{{ post.get_absolute_url }}"><h2>{{ post.title }}</h2></a>
+            <small>written by {{ post.author }} on {{ post.published }} in <a href="{{post.category.get_absolute_url}}">{{post.category}}</a></small>
+            <p>{{ post.content|linebreaksbr }}</p>
+        {% endfor %}
+        {% include 'blog/paginator.html' with page=posts %}
+    </div>
+    <div class="col-md-4">
+        <div class="page-header">
+            <h1>
+                Sidebar
+            </h1>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Backend for Post{% endblock %}
+
+{% block content %}
+<div class="table-responsive">
+    <table class="table table-hover ">
+        <tr>
+            <th>Title</th>
+            <th>Slug</th>
+            <th>Author</th>
+            <th>Category</th>
+            <th>Published</th>
+            <th>Status</th>
+            <th>Edit Post</th>
+            <th>Delete Post</th>
+        </tr>
+        {% for post in posts %}
+            {% if post.status == 'draft' %}
+                <tr class="table-danger">
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.slug }}</td>
+                    <td>{{ post.author }}</td>
+                    <td>{{ post.category }}</td>
+                    <td>{{ post.published }}</td>
+                    <td>{{ post.status }}</td>
+                    <td>
+                        <a href="{% url 'edit_post' slug=post.slug %}">
+                            <button type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-pencil">
+                                    Edit
+                                </span>
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'delete_post' slug=post.slug %}">
+                            <button type="button" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-pencil">
+                                    Delete
+                                </span>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>{{ post.title }}</td>
+                    <td>{{ post.slug }}</td>
+                    <td>{{ post.author }}</td>
+                    <td>{{ post.category }}</td>
+                    <td>{{ post.published }}</td>
+                    <td>{{ post.status }}</td>
+                    <td>
+                        <a href="{% url 'edit_post' slug=post.slug %}">
+                            <button type="button" class="btn btn-default">
+                                    Edit
+                            </button>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'delete_post' slug=post.slug %}">
+                            <button type="button" class="btn btn-danger">
+                                <span class="glyphicon glyphicon-pencil">
+                                    Delete
+                                </span>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+    {% include 'blog/paginator.html' with page=posts %}
+</div>
+{% endblock %}

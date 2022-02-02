@@ -1,0 +1,6 @@
+<h1>navbar</h1>
+<a href="{% url 'home' %}">home</a>
+{% for post in request.Navbar %}
+    {{post.title}}
+{% endfor %}
+

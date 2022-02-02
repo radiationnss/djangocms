@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+
+{% block description %}{{ post.seo_description }}{% endblock %}
+{% block title %}{{ post.seo_title }}{% endblock %}
+
+{% block content %}
+        <div class="row">
+                <div class="col-md-8">
+                        <div class="alert alert-danger" role="alert">this is a post preview</div>
+                        <div class="page-header">
+                                <h1>
+                                        {{post.title}}
+                                </h1>
+                        </div>
+                        <small>
+                                <p>written by {{ post.author }} on {{ post.published }} in <a href="{{post.category.get_absolute_url}}">{{post.category}}</a></p>
+                        </small>
+                        {{ post.content|linebreaksbr }}
+                </div>
+                <div class="col-md-4">
+
+                </div>
+        </div>
+
+        <!--add code snippet from readme file here for comments and uncomment the code related to comment-->
+{% endblock %}
